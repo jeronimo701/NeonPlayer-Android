@@ -1,0 +1,60 @@
+plugins { id 'com.android.application'; id 'org.jetbrains.kotlin.android' }
+android {
+    namespace 'neon.androidplayer'
+    compileSdk 35
+    defaultConfig { applicationId 'app.neon.player'; minSdk 26; targetSdk 35; versionCode 11; versionName '0.3.7'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner' }
+    buildFeatures { buildConfig true }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    splits { abi { enable true; reset(); include 'arm64-v8a', 'armeabi-v7a', 'x86_64'; universalApk false } }
+    packaging { jniLibs { useLegacyPackaging true }; resources { excludes += ['META-INF/versions/**', 'META-INF/DEPENDENCIES', 'META-INF/INDEX.LIST']; merges += ['META-INF/LICENSE', 'META-INF/NOTICE', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt'] } }
+    sourceSets.main.assets.srcDir layout.buildDirectory.dir('generated/engineAssets')
+}
+tasks.register('engineRevision') {
+    inputs.dir('src/main/assets/scripts'); inputs.dir('src/main/assets/shaders'); inputs.file('src/main/assets/cacert.pem')
+    def target = layout.buildDirectory.dir('generated/engineAssets')
+    outputs.dir(target)
+    doLast {
+        def digest = java.security.MessageDigest.getInstance('SHA-256')
+        fileTree('src/main/assets').matching { include 'scripts/**', 'shaders/**', 'cacert.pem' }.files.sort { it.path }.each {
+            digest.update(it.name.getBytes('UTF-8')); digest.update(it.bytes)
+        }
+        def output = target.get().file('engine-revision.txt').asFile
+        output.parentFile.mkdirs(); output.text = digest.digest().encodeHex().toString()
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'engineRevision' }
+
+// A single repeatable command produces reviewable APK names with the actual app version.
+tasks.register('exportDebugApks') {
+    dependsOn 'assembleDebug'
+    doLast {
+        def version = android.defaultConfig.versionName
+        def destination = rootProject.file('dist')
+        destination.mkdirs()
+        def hashes = []
+        ['arm64-v8a', 'armeabi-v7a', 'x86_64'].each { abi ->
+            def source = layout.buildDirectory.file("outputs/apk/debug/app-${abi}-debug.apk").get().asFile
+            def target = new File(destination, "Neon-Player-${version}-${abi}.apk")
+            java.nio.file.Files.copy(source.toPath(), target.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+            def digest = java.security.MessageDigest.getInstance('SHA-256').digest(target.bytes).encodeHex().toString()
+            hashes.add("${digest}  ${target.name}")
+        }
+        new File(destination, "Neon-Player-${version}-SHA256.txt").text = hashes.join('\n') + '\n'
+    }
+}
+kotlin { jvmToolchain(17) }
+dependencies {
+    implementation 'io.github.junkfood02.youtubedl-android:library:0.18.1'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.window:window:1.3.0'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
+    implementation 'com.hierynomus:smbj:0.14.0'
+    implementation 'commons-net:commons-net:3.11.1'
+    implementation 'com.github.mwiede:jsch:0.2.21'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:core:1.6.1'
+}

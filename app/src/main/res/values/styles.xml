@@ -1,0 +1,21 @@
+<resources>
+    <style name="NeonTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item><item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorAccent">#56E9E2</item><item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item><item name="android:windowBackground">#101216</item>
+        <item name="android:alertDialogTheme">@style/NeonDialogTheme</item>
+    </style>
+    <style name="NeonDialogTheme" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">#56E9E2</item><item name="android:colorBackground">#1B1F25</item>
+        <item name="android:textColorPrimary">#F0F2F5</item><item name="android:textColorSecondary">#9299A6</item>
+        <item name="android:windowBackground">#1B1F25</item>
+    </style>
+    <style name="AmberTheme" parent="NeonTheme">
+        <item name="android:colorAccent">#FF9900</item><item name="android:windowBackground">#080808</item>
+        <item name="android:alertDialogTheme">@style/AmberDialogTheme</item>
+    </style>
+    <style name="AmberDialogTheme" parent="NeonDialogTheme">
+        <item name="android:colorAccent">#FF9900</item><item name="android:colorBackground">#191919</item>
+        <item name="android:textColorSecondary">#A4A09A</item><item name="android:windowBackground">#191919</item>
+    </style>
+</resources>

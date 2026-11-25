@@ -1,0 +1,12 @@
+/.gradle/
+/.kotlin/
+/.gradle-publication/
+**/build/
+/dist/
+/vendor/*.apk
+/app/src/main/jniLibs/
+/local.properties
+*.log
+*.keystore
+*.jks
+__pycache__/

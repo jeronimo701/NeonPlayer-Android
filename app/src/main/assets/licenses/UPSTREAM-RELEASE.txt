@@ -1,0 +1,37 @@
+#### :information_source: New `allstorage` APK
+ 
+The `api29` APK has been removed and replaced with `allstorage`, which uses the "manage external storage" permission to allow unrestricted file access without having to downgrade the API level.
+It will stay separate and not be shipped to Google Play.
+
+## Change log
+
+- Fixes:
+  - Fixed freeze/long delay before first TLS connection (@obscenelyvague)
+  - hwdec-related bug fixes
+
+## Full set of build dependencies
+
+* Android NDK r30
+* mbedtls 3.6.7
+* dav1d videolan/dav1d@362bc1138228390a0a521ecf3af18b23c6afeb9e
+* ffmpeg ffmpeg/ffmpeg@094a2f8a2a5e7fa64736e067de224ce28fdf5979
+* libxml2 2.15.4
+* fontconfig 2.18.3
+* freetype 2.14.3
+* fribidi 1.0.16
+* harfbuzz 14.4.0
+* libunibreak 8.0
+* libass libass/libass@b2fe9d8770678a7b5271387d38c20657ebf3429a
+* lua 5.2.4
+* libplacebo haasn/libplacebo@3330a515d62139259c26239014f286e233bd3a5c
+* curl 8.21.0
+* libmpv mpv-player/mpv@0b7ed670f7c353dd3dd4f8ae0fc788a181a15aa6
+* mpv-android fdf74f6830c47dbaa8a22ac79726e8303f1db5af
+
+
+### :arrow_down_small: Which APK do I download? :arrow_down_small: 
+
+You generally want to get **`arm64-v8a`**. Try `armeabi-v7a` for old devices. Or `x86` otherwise.
+If you are unsure then the `universal` APK will work everywhere.
+
+**Note**: Android TV is supported, but only available on F-Droid or by installing the APK manually using e.g. [Downloader](https://play.google.com/store/apps/details?id=com.esaba.downloader).
