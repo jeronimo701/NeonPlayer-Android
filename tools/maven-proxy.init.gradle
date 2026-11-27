@@ -1,0 +1,10 @@
+// Optional invocation-only workaround for this host's Java TLS stall.
+settingsEvaluated { settings ->
+    settings.dependencyResolutionManagement.repositories.each { repo ->
+        if (repo instanceof org.gradle.api.artifacts.repositories.MavenArtifactRepository) {
+            if (repo.url.host == 'repo.maven.apache.org') repo.url = uri('http://127.0.0.1:18845/central/')
+            else if (repo.url.host == 'dl.google.com') repo.url = uri('http://127.0.0.1:18845/google/')
+            if (repo.url.host == '127.0.0.1') repo.allowInsecureProtocol = true
+        }
+    }
+}

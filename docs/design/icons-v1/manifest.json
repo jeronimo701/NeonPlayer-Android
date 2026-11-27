@@ -1,0 +1,41 @@
+{
+  "generator": "built-in image_gen",
+  "selected": null,
+  "variants": [
+    {
+      "number": 1,
+      "label": "1 · Неоновый контур",
+      "file": "01-neon-outline.png",
+      "source": "C:\\Users\\NanoSpora\\.codex\\generated_images\\01a157c9-0cd4-78d1-bdfe-24da94c95214\\exec-e4887b95-01f6-4697-aacf-259ee9505b8a.png",
+      "prompt": "Use case: logo-brand. Asset type: Android launcher icon concept for Neon Player, a video player whose mascot is a duck. Create ONE beautiful square icon, front view of the finished icon artwork only, no device mockup, no contact sheet. Full-bleed very dark graphite background, no outer frame, no pre-rounded squircle tile. A single instantly recognizable duck emblem centered entirely within the middle 62% of the square, with generous safe margins so Android circular and rounded masks won't clip it. Strong silhouette legible at 48 pixels. Include an understated play-triangle motif integrated into the duck wing or body, not a separate badge. No text, letters, numbers, watermark or other objects. Original design. STYLE: premium minimal neon sign. Side-profile duck drawn with a small number of bold smooth luminous tube strokes. Cyan head and back, vivid magenta lower body and tail, warm yellow beak, a small cyan eye. Wing is a simple glowing play triangle. Sparse, clean, graphic and iconic, controlled soft halo against charcoal, not a realistic 3D toy, no tiny decorative linework. Duck recognizable from silhouette alone."
+    },
+    {
+      "number": 2,
+      "label": "2 · Кристалл",
+      "file": "02-crystal-glass.png",
+      "source": "C:\\Users\\NanoSpora\\.codex\\generated_images\\01a157c9-0cd4-78d1-bdfe-24da94c95214\\exec-0b06479a-97f7-4f1e-9b7d-0b203d5c8b5f.png",
+      "prompt": "Use case: logo-brand. Asset type: Android launcher icon concept for Neon Player, a video player whose mascot is a duck. Create ONE beautiful square icon, front view of the finished icon artwork only, no device mockup, no contact sheet. Full-bleed very dark graphite background, no outer frame, no pre-rounded squircle tile. A single instantly recognizable duck emblem centered entirely within the middle 62% of the square, with generous safe margins so Android circular and rounded masks won't clip it. Strong silhouette legible at 48 pixels. Include an understated play-triangle motif integrated into the duck wing or body, not a separate badge. No text, letters, numbers, watermark or other objects. Original design. STYLE: high-end sculpted glass icon. One softly rounded stylized duck made from luminous translucent aqua optical glass, violet refraction at its lower belly, tiny amber glass beak, bright restrained rim highlights. Internal triangular negative-space wing suggests a play button. A simple solid sculptural silhouette with two or three broad glass planes rather than elaborate facets. Elegant, futuristic, sophisticated, very readable at small sizes, no environment, no text."
+    },
+    {
+      "number": 3,
+      "label": "3 · Минимализм",
+      "file": "03-flat-gold.png",
+      "source": "C:\\Users\\NanoSpora\\.codex\\generated_images\\01a157c9-0cd4-78d1-bdfe-24da94c95214\\exec-709cfd6c-5615-40f6-a9d2-6c28275e40a8.png",
+      "prompt": "Use case: logo-brand. Asset type: Android launcher icon concept for Neon Player, a video player whose mascot is a duck. Create ONE beautiful square icon, front view of the finished icon artwork only, no device mockup, no contact sheet. Full-bleed very dark graphite background, no outer frame, no pre-rounded squircle tile. A single instantly recognizable duck emblem centered entirely within the middle 62% of the square, with generous safe margins so Android circular and rounded masks won't clip it. Strong silhouette legible at 48 pixels. Include an understated play-triangle motif integrated into the duck wing or body, not a separate badge. No text, letters, numbers, watermark or other objects. Original design. STYLE: exceptionally clean flat geometric brand mark, almost vector-like with immaculate edges. Bold golden-yellow duck silhouette constructed from soft circles and flowing simple curves, graphite triangular cutout for the wing/play symbol, tiny black eye, subtly orange beak. One very subtle cyan edge accent. Completely flat fills, no 3D rendering, no glass, no lighting effects, no neon glow, no gradients inside the duck. Maximum recognition and contrast at tiny sizes. Friendly but mature."
+    },
+    {
+      "number": 4,
+      "label": "4 · Мягкий 3D",
+      "file": "04-soft-clay.png",
+      "source": "C:\\Users\\NanoSpora\\.codex\\generated_images\\01a157c9-0cd4-78d1-bdfe-24da94c95214\\exec-7b3d8674-c3f4-4551-a8af-3e950df4b46f.png",
+      "prompt": "Use case: logo-brand. Asset type: Android launcher icon concept for Neon Player, a video player whose mascot is a duck. Create ONE beautiful square icon, front view of the finished icon artwork only, no device mockup, no contact sheet. Full-bleed very dark graphite background, no outer frame, no pre-rounded squircle tile. A single instantly recognizable duck emblem centered entirely within the middle 62% of the square, with generous safe margins so Android circular and rounded masks won't clip it. Strong silhouette legible at 48 pixels. Include an understated play-triangle motif integrated into the duck wing or body, not a separate badge. No text, letters, numbers, watermark or other objects. Original design. STYLE: friendly tactile clay 3D app mascot, soft-touch matte material rather than glossy rubber. An adorable plump teal duck with orange rounded beak, short tail and softly embossed magenta triangular play wing. Three-quarter view facing right, confident clean silhouette, expressive single dark eye, slightly oversized head. Warm soft studio highlights, subtle purple rim lighting, very restrained short contact shadow, no pedestal or environment. Broad simple forms, not fuzzy, no feathers or tiny detail."
+    },
+    {
+      "number": 5,
+      "label": "5 · Ретро-пиксель",
+      "file": "05-pixel-retro.png",
+      "source": "C:\\Users\\NanoSpora\\.codex\\generated_images\\01a157c9-0cd4-78d1-bdfe-24da94c95214\\exec-0218aa2c-e9bb-42ce-ab34-6ccce70df302.png",
+      "prompt": "Use case: logo-brand. Asset type: Android launcher icon concept for Neon Player, a video player whose mascot is a duck. Create ONE beautiful square icon, front view of the finished icon artwork only, no device mockup, no contact sheet. Full-bleed very dark graphite background, no outer frame, no pre-rounded squircle tile. A single instantly recognizable duck emblem centered entirely within the middle 62% of the square, with generous safe margins so Android circular and rounded masks won't clip it. Strong silhouette legible at 48 pixels. Include an understated play-triangle motif integrated into the duck wing or body, not a separate badge. No text, letters, numbers, watermark or other objects. Original design. STYLE: refined retro pixel-art launcher icon. A compact yellow and orange duck in side profile facing right, black eye, cyan triangular pixel play mark on its wing, small magenta highlights on tail and belly. Built from crisp intentional large square pixels with clean staircase edges, approximately a 32 by 32 logical sprite grid, razor-sharp nearest-neighbor aesthetic, no smoothing, no blur, no antialiasing. Modern carefully balanced pixel silhouette on graphite. Not a game scene, no ground, no extra objects, no text."
+    }
+  ]
+}

@@ -22,7 +22,9 @@ data class Connection(val type: String, val host: String, val port: Int, val pat
     internal fun torr() = Sources.Torr(checkedBase(host), Sources.Login(user,password,""))
 }
 data class RemoteEntry(val name: String, val path: String, val folder: Boolean, val size: Long)
-data class TorrentHit(val title: String, val link: String, val size: Long, val seeds: Int, val tracker: String)
+data class TorrentHit(val title: String, val link: String, val size: Long, val seeds: Int, val tracker: String,
+    val peers:Int=-1,val published:String="",val updated:String="",val quality:Int=0,val year:Int=0,
+    val videoType:String="",val voices:List<String> = emptyList(),val seasons:List<String> = emptyList(),val page:String="")
 data class HostTrust(val actual: String, val previous: String): IOException("Ключ SSH-сервера ${if(previous.isEmpty()) "ещё не подтверждён" else "изменился"}: $actual")
 
 internal fun checkedBase(raw: String): String {
@@ -53,9 +55,16 @@ internal fun parseTorrentResults(raw: String): List<TorrentHit> {
         val title = row.optString("title", row.optString("Title"))
         val link = row.optString("magnet").ifBlank { row.optString("MagnetUri") }.ifBlank { row.optString("Link") }
         if(title.isBlank() || !(link.startsWith("magnet:?") || link.startsWith("https://") || link.startsWith("http://"))) null
-        else TorrentHit(title,link,row.optLong("size",row.optLong("Size",-1)), row.optInt("seeders",row.optInt("Seeders",-1)),row.optString("tracker",row.optString("Tracker")))
-    }.sortedByDescending { it.seeds }.take(500)
+        else TorrentHit(title,link,row.torrentLong("size","Size"),row.torrentLong("sid","seeders","Seeders").coerceAtMost(Int.MAX_VALUE.toLong()).toInt(),row.optString("tracker",row.optString("Tracker")),
+            peers=row.torrentLong("pir","peers","Peers").coerceAtMost(Int.MAX_VALUE.toLong()).toInt(),
+            published=row.torrentText("createTime","PublishDate","date"),updated=row.torrentText("updateTime","Updated"),
+            quality=row.torrentLong("quality","Quality").coerceAtLeast(0).toInt(),year=row.torrentLong("relased","year","Year").coerceAtLeast(0).toInt(),
+            videoType=row.torrentText("videotype","VideoType"),voices=row.torrentTags("voices"),seasons=row.torrentTags("seasons"),page=row.torrentText("url","Details"))
+    }.take(2000)
 }
+private fun JSONObject.torrentLong(vararg names:String):Long=names.firstNotNullOfOrNull{key->if(isNull(key))null else opt(key)?.toString()?.toDoubleOrNull()?.takeIf{it.isFinite()&&it>=0&&it<Long.MAX_VALUE.toDouble()}?.toLong()}?:-1
+private fun JSONObject.torrentText(vararg names:String)=names.firstNotNullOfOrNull{key->if(isNull(key))null else optString(key).takeIf{it.isNotBlank()&&it!="null"}}.orEmpty()
+private fun JSONObject.torrentTags(key:String):List<String>{val a=optJSONArray(key)?:return emptyList();return (0 until a.length()).mapNotNull{if(a.isNull(it))null else a.optString(it).takeIf{it.isNotBlank()}}}
 object TorrentApi {
     fun search(base: String, key: String, query: String, jackett: Boolean): List<TorrentHit> {
         require(query.trim().length>=2) { "Введи хотя бы два символа" }

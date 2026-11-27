@@ -1128,15 +1128,15 @@ class MainActivity:ComponentActivity(),DialogBoundsHost {
         val screen=DeckScreen(this,"Поиск торрентов",query)
         var order="seeds";var tracker:String?=null;var quality:String?=null
         fun render(){
-            val filtered=hits.distinctBy{it.link}.filter{(tracker==null||it.tracker==tracker)&&(quality==null||it.title.contains(quality!!,ignoreCase=true))}
-            val sorted=when(order){"size"->filtered.sortedBy{it.size.takeIf{s->s>=0}?:Long.MAX_VALUE};"name"->filtered.sortedWith(Comparator{a,b->naturalCompare(a.title,b.title)});else->filtered.sortedByDescending{it.seeds}}
-            screen.status.text="$query · ${sorted.size} результатов"
-            screen.rows(sorted.map{hit->DeckRow(hit.title,"${size(hit.size)} · ${if(hit.seeds<0)"сиды: нет данных"else "сидов: ${hit.seeds}"}",hit.tracker,listOf(
+            val filtered=hits.distinctBy{it.link}.filter{(tracker==null||it.tracker==tracker)&&(quality==null||if(it.quality>0)it.quality.toString()==quality else it.title.contains(quality!!,ignoreCase=true))}
+            val sorted=orderedTorrents(filtered,order)
+            screen.status.text="$query · ${sorted.size} результатов"+if(sorted.size>500)" · показаны первые 500, меняй сортировку или фильтр"else ""
+            screen.rows(sorted.take(500).map{hit->DeckRow(hit.title,"${size(hit.size)} · ${if(hit.seeds<0)"сиды: —"else "сиды: ${hit.seeds}"} · ${if(hit.peers<0)"пиры: —"else "пиры: ${hit.peers}"}",listOf(hit.tracker,if(hit.quality>0)"${hit.quality}p"else "",hit.videoType,if(hit.year>0)hit.year.toString()else "",hit.published.takeIf{torrentDate(it)!=Long.MIN_VALUE}?.substringBefore('T').orEmpty(),hit.voices.joinToString(" / "),if(hit.seasons.isEmpty())""else "Сезоны: ${hit.seasons.joinToString()}").filter{it.isNotBlank()}.joinToString(" · "),listOf(
                 "▶ Смотреть" to {torrentActions(hit,0){screen.dismiss()}},"＋ TorrServer" to {torrentActions(hit,1)}
             ))},{index->torrentActions(sorted[index])})
         }
-        screen.action("Сортировка"){choose("Сортировка",listOf("Больше сидов","Меньше размер","По названию")){order=listOf("seeds","size","name")[it];render()}}
-        screen.action("Качество"){val options=listOf("Все","2160","1080","720","480");choose("Качество в названии",options){quality=options[it].takeIf{it!="Все"};render()}}
+        screen.action("Сортировка"){choose("Сортировка",listOf("Больше сидов","Больше пиров","Сначала новые","Недавно обновлённые","Больше размер","Меньше размер","Выше качество","По названию")){order=listOf("seeds","peers","date","updated","size","sizeAsc","quality","name")[it];render()}}
+        screen.action("Качество"){val options=listOf("Все","2160","1080","720","480");choose("Качество видео",options){quality=options[it].takeIf{it!="Все"};render()}}
         screen.action("Трекер"){val options=listOf("Все трекеры")+hits.map{it.tracker}.filter{it.isNotBlank()}.distinct().sorted();choose("Трекер",options){tracker=options[it].takeIf{it!="Все трекеры"};render()}}
         render();screen.show()
     }
