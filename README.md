@@ -39,6 +39,13 @@
 
 Сборки подписаны отладочным сертификатом. Для обновления поверх прежней установки подпись должна совпадать. Контрольные суммы — `SHA256SUMS.txt` в релизе.
 
+
+## Интерфейс
+
+<p><img src="docs/screenshots/orange-home.png" width="240" alt="Главная Neon Player, тема Orange"> <img src="docs/screenshots/files.png" width="240" alt="Файлы Neon Player"> <img src="docs/screenshots/deck-home.png" width="240" alt="Тема Deck"></p>
+
+Orange и список файлов сняты в 0.3.6, Deck — в ранней alpha.5. Это реальные предыдущие экраны, а не новые снимки 0.3.8; исправления этого выпуска относятся к поиску и метаданным.
+
 ## Full, Lite и NeonTorr
 
 | Версия | Для чего |
